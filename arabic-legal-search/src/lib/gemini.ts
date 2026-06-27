@@ -22,12 +22,11 @@ function getGeminiClient(): GoogleGenerativeAI {
 export async function generateEmbedding(text: string): Promise<number[]> {
   const genAI = getGeminiClient();
 
-  const result = await genAI.embedContent({
-    model: "models/text-embedding-004",
-    content: {
-      parts: [{ text }],
-    },
+  const model = genAI.getGenerativeModel({
+    model: "text-embedding-004",
   });
+
+  const result = await model.embedContent(text);
 
   return result.embedding.values;
 }
