@@ -77,24 +77,23 @@ export async function fetchSheetData(): Promise<LegalRow[]> {
 
   const data: LegalRow[] = [];
 
-  // Row 0 is the header — skip it and parse from row 1 onward
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
 
-    // Guard: skip rows that are missing required fields
-    if (!row || row.length < 4) continue;
+// Row 0 is the header — skip it and parse from row 1 onward
+for (let i = 1; i < rows.length; i++) {
+  const row = rows[i];
 
-    const [id, question, keywords, legalAnswer] = row;
+  if (!row || row.length < 3) continue;
 
-    if (!id || !question || !legalAnswer) continue;
+  const [question, legalAnswer, category] = row;
 
-    data.push({
-      id: String(id).trim(),
-      question: String(question).trim(),
-      keywords: String(keywords ?? "").trim(),
-      legalAnswer: String(legalAnswer).trim(),
-    });
-  }
+  if (!question || !legalAnswer) continue;
 
+  data.push({
+    id: String(i),
+    question: String(question).trim(),
+    keywords: String(category ?? "").trim(),
+    legalAnswer: String(legalAnswer).trim(),
+  });
+}
   return data;
 }
