@@ -30,7 +30,6 @@ export async function generateEmbedding(text: string): Promise<number[]> {
 
   return result.embedding.values;
 }
-
 /**
  * Dot-product cosine similarity between two equal-length vectors.
  * Returns a value in [-1, 1]; higher = more similar.
