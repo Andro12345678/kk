@@ -65,7 +65,7 @@ export async function fetchSheetData(): Promise<LegalRow[]> {
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: sheetId,   // ← always from env var, never hardcoded
-    range: "Sheet1!A:D",      // columns A(ID) B(Question) C(Keywords) D(LegalAnswer)
+    range: "A:D",     // columns A(ID) B(Question) C(Keywords) D(LegalAnswer)
   });
 
   const rows = response.data.values;
